@@ -9,6 +9,23 @@ Custom iA Writer template with generated sidenotes for markdown footnotes.
 - `Sidenotes.iatemplate/Contents/Resources/sidenotes.css`
 - `Sidenotes.iatemplate/Contents/Resources/sidenotes.js`
 
+## Package File Structure
+
+```text
+.
+|-- Sidenotes.iatemplate/
+    `-- Contents/
+        |-- Info.plist
+        `-- Resources/
+            |-- document.html
+            |-- LICENSE.txt
+            |-- sidenotes-markdown-dark.css
+            |-- sidenotes-markdown-light.css
+            |-- sidenotes.css
+            |-- sidenotes.html
+            `-- sidenotes.js
+```
+
 ## Install / Reload (macOS)
 
 1. Install the `.iatemplate` bundle in iA Writer Preferences.
