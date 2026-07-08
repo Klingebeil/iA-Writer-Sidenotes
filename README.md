@@ -2,13 +2,6 @@
 
 Custom iA Writer template with generated sidenotes for markdown footnotes.
 
-## Main Files
-
-- `Sidenotes.iatemplate/Contents/Info.plist`
-- `Sidenotes.iatemplate/Contents/Resources/document.html`
-- `Sidenotes.iatemplate/Contents/Resources/sidenotes.css`
-- `Sidenotes.iatemplate/Contents/Resources/sidenotes.js`
-
 ## Package File Structure
 
 ```text
@@ -45,9 +38,3 @@ Custom iA Writer template with generated sidenotes for markdown footnotes.
 - Preventing sidenote collisions and minimizing vertical jumps is a tradeoff; the current setup prioritizes non-overlapping notes.
 - Sidenote generation depends on JavaScript execution in iA Writer preview/export.
 - Installed templates are copied by iA Writer, so source edits require reinstalling or editing the installed bundle.
-
-## Archive
-
-Legacy reference templates and sample files are kept in:
-
-- `archive/legacy-reference/`
