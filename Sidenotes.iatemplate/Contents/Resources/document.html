@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+  <link rel="stylesheet" media="all" href="sidenotes.css">
+  <meta name="viewport" content="initial-scale=1, viewport-fit=cover">
+  <!--
+  <script>
+    (function () {
+      function ensureInlineProbe() {
+        if (!document.body) {
+          return;
+        }
+        var probe = document.getElementById('ia-inline-probe');
+        if (!probe) {
+          probe = document.createElement('div');
+          probe.id = 'ia-inline-probe';
+          document.body.insertBefore(probe, document.body.firstChild);
+        }
+        probe.textContent = 'INLINE JS OK';
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        ensureInlineProbe();
+        var ticks = 0;
+        var timer = window.setInterval(function () {
+          ensureInlineProbe();
+          ticks += 1;
+          if (ticks > 20) {
+            window.clearInterval(timer);
+          }
+        }, 250);
+      });
+    })();
+  </script>
+  -->
+  <script src="sidenotes.js"></script>
+</head>
+<body class="markdown-body" data-document>
+  <!--
+  <noscript>
+    <div id="ia-noscript-probe">JAVASCRIPT DISABLED (noscript visible)</div>
+  </noscript>
+  -->
+  &nbsp;
+</body>
+</html>
