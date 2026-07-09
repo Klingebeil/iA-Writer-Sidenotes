@@ -19,6 +19,10 @@ Custom iA Writer template with generated sidenotes for markdown footnotes.
             `-- sidenotes.js
 ```
 
+## Example
+
+![example](example.webp)
+
 ## Install / Reload (macOS)
 
 1. Install the `.iatemplate` bundle in iA Writer Preferences.
