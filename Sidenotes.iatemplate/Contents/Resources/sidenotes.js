@@ -101,6 +101,80 @@
     removeClass(root, "ia-js-sidenotes");
   }
 
+  function resetSidenoteOffsets(root) {
+    var sidenotes = root.querySelectorAll(".sidenote");
+    var i;
+    for (i = 0; i < sidenotes.length; i += 1) {
+      sidenotes[i].style.removeProperty("--sidenote-shift");
+    }
+  }
+
+  function getStyleNumber(element, propertyName) {
+    var value = window.getComputedStyle(element).getPropertyValue(propertyName);
+    var number = parseFloat(value);
+    return isNaN(number) ? 0 : number;
+  }
+
+  function positionSidenotes(root) {
+    if (!root) {
+      return;
+    }
+
+    var sidenotes = root.querySelectorAll(".sidenote");
+    if (sidenotes.length === 0) {
+      return;
+    }
+
+    var firstNoteStyle = window.getComputedStyle(sidenotes[0]);
+    if (!firstNoteStyle || firstNoteStyle.display === "none") {
+      return;
+    }
+
+    resetSidenoteOffsets(root);
+
+    var rootRect = root.getBoundingClientRect();
+    var bottomLimit = window.pageYOffset + rootRect.bottom;
+    var minimumGap = Math.max(8, getStyleNumber(sidenotes[0], "margin-bottom"));
+    var previousBottom = null;
+    var i;
+
+    for (i = 0; i < sidenotes.length; i += 1) {
+      var note = sidenotes[i];
+      var rect = note.getBoundingClientRect();
+      var desiredTop = window.pageYOffset + rect.top;
+      var height = rect.height;
+      var minTop = previousBottom === null ? desiredTop : previousBottom + minimumGap;
+      var maxTop = bottomLimit - height;
+      var placedTop = desiredTop;
+
+      if (placedTop < minTop) {
+        placedTop = minTop;
+      }
+
+      if (placedTop > maxTop) {
+        placedTop = maxTop;
+      }
+
+      if (placedTop < minTop) {
+        placedTop = minTop;
+      }
+
+      note.style.setProperty("--sidenote-shift", Math.round(placedTop - desiredTop) + "px");
+      previousBottom = placedTop + height;
+    }
+  }
+
+  function scheduleSidenotePositioning(root) {
+    if (!window.requestAnimationFrame) {
+      positionSidenotes(root);
+      return;
+    }
+
+    window.requestAnimationFrame(function () {
+      positionSidenotes(root);
+    });
+  }
+
   function isFootnoteId(id) {
     if (!id) {
       return false;
@@ -258,6 +332,8 @@
       addClass(root, "ia-js-sidenotes");
     }
 
+    scheduleSidenotePositioning(root);
+
     setDebug(
       "items=" + noteItems.length +
       ", hasFootnotesClass=" + (hasFootnotesClass ? "yes" : "no") +
@@ -279,6 +355,10 @@
       buildSidenotes(root);
     }
 
+    function reposition() {
+      scheduleSidenotePositioning(root);
+    }
+
     rerender();
     window.setTimeout(rerender, 50);
     window.setTimeout(rerender, 250);
@@ -292,6 +372,12 @@
         window.clearInterval(keepAlive);
       }
     }, 250);
+
+    window.addEventListener("resize", reposition);
+    window.addEventListener("beforeprint", function () {
+      positionSidenotes(root);
+    });
+    window.addEventListener("afterprint", reposition);
 
     root.addEventListener("ia-writer-change", function () {
       rerender();

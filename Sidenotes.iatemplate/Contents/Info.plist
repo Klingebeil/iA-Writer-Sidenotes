@@ -22,5 +22,7 @@
 	<string>Johannes Klingebiel</string>
 	<key>IATemplateAuthorURL</key>
 	<string>https://johannesklingebiel.de</string>
+	<key>IATemplateTitleFile</key>
+	<string>title</string>
 </dict>
 </plist>

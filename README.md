@@ -29,12 +29,13 @@ Custom iA Writer template with generated sidenotes for markdown footnotes.
 ## Notes
 
 - Sidenotes are generated from footnote references by `sidenotes.js`.
+- Sidenotes use a measured post-layout adjustment pass to avoid overlapping each other and to keep notes away from the bottom edge in wide-screen and print layouts.
 - Typography and layout variables live at the top of `sidenotes.css`.
 - Print behavior is configured in the `@media print` section.
 
 ## Limitations
 
-- Print/PDF layout with floating sidenotes is constrained by WebKit pagination and can still show vertical jumps near page breaks.
-- Preventing sidenote collisions and minimizing vertical jumps is a tradeoff; the current setup prioritizes non-overlapping notes.
+- Very tall sidenotes can still be constrained by the available page/viewport height, so the layout prioritizes preserving source order and avoiding collisions over perfectly compact packing.
+- Print/PDF layout is still constrained by WebKit pagination and can show vertical jumps near page breaks.
 - Sidenote generation depends on JavaScript execution in iA Writer preview/export.
 - Installed templates are copied by iA Writer, so source edits require reinstalling or editing the installed bundle.

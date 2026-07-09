@@ -388,6 +388,8 @@
     line-height: var(--sidenote-line-height);
     border-left: none;
     padding-left: var(--sidenote-padding-left);
+    transform: translateY(var(--sidenote-shift, 0px));
+    transform-origin: top right;
   }
 
   .markdown-body .sidenote > :first-child {
@@ -446,6 +448,8 @@
     padding-left: var(--sidenote-padding-left);
     page-break-inside: auto;
     break-inside: auto;
+    transform: translateY(var(--sidenote-shift, 0px));
+    transform-origin: top right;
   }
 
   .markdown-body.ia-js-sidenotes .sidenote > :first-child {
