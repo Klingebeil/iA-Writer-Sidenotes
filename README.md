@@ -34,16 +34,8 @@ Custom iA Writer template with generated sidenotes for markdown footnotes.
 
 - Sidenotes are generated from footnote references by `sidenotes.js`.
 - Sidenotes use a measured post-layout adjustment pass to avoid overlapping each other and to keep notes away from the bottom edge in wide-screen and print layouts.
-- Typography and layout variables are centralized in `sidenotes-variables.css`.
+- Typography and layout variables live at the top of `sidenotes.css`.
 - Print behavior is configured in the `@media print` section.
-
-## Typographic Features
-
-- Regular emphasis (`*italic*`) remains italic.
-- Combined emphasis (`***bold italic***` or nested bold+italic tags) is styled as italic small caps.
-- Monospaced treatment for code, superscripts, and sidenote markers for visual contrast and stable alignment.
-- Blockquote highlight option: bold text inside blockquotes is rendered as a soft marker-style highlight using `--blockquote-highlight-bg`.
-- Responsive spacing and rhythm variables (body size, line height, heading spacing, list spacing) are exposed as CSS custom properties.
 
 ## Limitations
 
