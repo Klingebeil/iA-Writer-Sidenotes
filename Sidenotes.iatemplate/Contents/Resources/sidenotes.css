@@ -69,7 +69,18 @@
 
 .markdown-body em,
 .markdown-body i {
-  font-style: normal;
+  font-style: italic;
+}
+
+.markdown-body em strong,
+.markdown-body em b,
+.markdown-body i strong,
+.markdown-body i b,
+.markdown-body strong em,
+.markdown-body strong i,
+.markdown-body b em,
+.markdown-body b i {
+  font-style: italic;
   font-family: var(--font-serif);
   text-transform: lowercase;
   font-variant: small-caps;
@@ -505,7 +516,34 @@ html.night-mode .markdown-body em,
 html.night-mode .markdown-body i,
 .markdown-body em,
 .markdown-body i {
-  font-style: normal;
+  font-style: italic;
+}
+
+html:not(.night-mode) .markdown-body em strong,
+html:not(.night-mode) .markdown-body em b,
+html:not(.night-mode) .markdown-body i strong,
+html:not(.night-mode) .markdown-body i b,
+html:not(.night-mode) .markdown-body strong em,
+html:not(.night-mode) .markdown-body strong i,
+html:not(.night-mode) .markdown-body b em,
+html:not(.night-mode) .markdown-body b i,
+html.night-mode .markdown-body em strong,
+html.night-mode .markdown-body em b,
+html.night-mode .markdown-body i strong,
+html.night-mode .markdown-body i b,
+html.night-mode .markdown-body strong em,
+html.night-mode .markdown-body strong i,
+html.night-mode .markdown-body b em,
+html.night-mode .markdown-body b i,
+.markdown-body em strong,
+.markdown-body em b,
+.markdown-body i strong,
+.markdown-body i b,
+.markdown-body strong em,
+.markdown-body strong i,
+.markdown-body b em,
+.markdown-body b i {
+  font-style: italic;
   font-family: var(--font-serif);
   text-transform: lowercase;
   font-variant: small-caps;
