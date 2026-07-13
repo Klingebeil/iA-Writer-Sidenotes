@@ -37,13 +37,10 @@
   /* Shared padding and sizing */
   --section-padding-vertical: 1em;
   --section-font-size: 0.6em;
-  --section-color: var(--color-secondary);
-  --section-border-color: var(--color-border);
 
   /* Header specific */
   --header-title-font-weight: 500;
   --header-author-font-size: 0.9em;
-  --header-author-color: var(--color-muted);
 
   /* Footer specific */
   --footer-color: var(--color-muted);
@@ -52,8 +49,6 @@
   /* ========== PRINT ========== */
   --print-horizontal-padding: 75px;
   --print-sidenote-margin-bottom: 0.9rem;
-  --print-sidenote-color: var(--color-secondary);
-  --print-sidenote-border-color: var(--color-border);
 }
 
 @media screen and (max-width: 420px) {
@@ -122,6 +117,12 @@
   --sup-border-radius: 0pt;
   --sup-padding: 0 0;
   --sup-vertical-align: 4pt;
+
+  /* Tables */
+  --table-font-size: 0.8em;
+  --table-header-font-size: 0.7em;
+  --table-cell-padding: 6px;
+  --table-line-height: var(--body-line-height);
 
   /* Blockquotes */
   --blockquote-highlight-bg: var(--color-highlight);
@@ -253,7 +254,7 @@
 .markdown-body sup a:hover,
 .markdown-body sup a:active {
   color: inherit;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 .markdown-body .sidenote-marker {
@@ -376,9 +377,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 0px solid var(--section-border-color) !important;
+  border-bottom: 0pt solid var(--color-muted) !important;
   font-size: var(--section-font-size) !important;
-  color: var(--section-color) !important;
+  color: var(--color-secondary) !important;
 }
 
 .header-left {
@@ -395,7 +396,6 @@ body {
 
 .header-author-text {
   font-size: var(--header-author-font-size);
-  color: var(--header-author-color);
 }
 
 /* Footer Styling */
@@ -408,7 +408,7 @@ body {
   display: flex !important;
   align-items: center;
   justify-content: space-between;
-  border-top: 0px solid var(--section-border-color) !important;
+  border-top: 0px solid var(--color-muted) !important;
   font-size: var(--section-font-size) !important;
   color: var(--footer-color) !important;
 }
@@ -645,13 +645,13 @@ body {
     margin-right: calc(-1 * (var(--sidenote-width) + var(--sidenote-gap)));
     margin-left: var(--sidenote-margin-left);
     margin-bottom: var(--print-sidenote-margin-bottom);
-    color: var(--print-sidenote-color);
+    color: var(--color-secondary);
     font-size: var(--sidenote-font-size);
     line-height: var(--sidenote-line-height);
     border-left: none;
     padding-left: var(--sidenote-padding-left);
-    page-break-inside: auto;
-    break-inside: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
     transform: translateY(var(--sidenote-shift, 0px));
     transform-origin: top right;
   }
@@ -702,30 +702,20 @@ body {
 
 /*
  Typography lock layer
- This block is intentionally at the end and matches the specificity of imported
- github-markdown light/night selectors (html:not(.night-mode) .markdown-body ...
- and html.night-mode .markdown-body ...) to keep custom typography stable.
 */
-html:not(.night-mode) .markdown-body,
-html.night-mode .markdown-body,
+html .markdown-body,
 .markdown-body {
   font-family: var(--font-serif);
   font-feature-settings: var(--font-feature-settings);
   font-size: var(--body-font-size);
 }
 
-html:not(.night-mode) .markdown-body h1,
-html:not(.night-mode) .markdown-body h2,
-html:not(.night-mode) .markdown-body h3,
-html:not(.night-mode) .markdown-body h4,
-html:not(.night-mode) .markdown-body h5,
-html:not(.night-mode) .markdown-body h6,
-html.night-mode .markdown-body h1,
-html.night-mode .markdown-body h2,
-html.night-mode .markdown-body h3,
-html.night-mode .markdown-body h4,
-html.night-mode .markdown-body h5,
-html.night-mode .markdown-body h6,
+html .markdown-body h1,
+html .markdown-body h2,
+html .markdown-body h3,
+html .markdown-body h4,
+html .markdown-body h5,
+html .markdown-body h6,
 .markdown-body h1,
 .markdown-body h2,
 .markdown-body h3,
@@ -736,14 +726,12 @@ html.night-mode .markdown-body h6,
   line-height: var(--heading-line-height);
 }
 
-html:not(.night-mode) .markdown-body h1,
-html.night-mode .markdown-body h1,
+html .markdown-body h1,
 .markdown-body h1 {
   font-feature-settings: var(--h1-swashes);
 }
 
-html:not(.night-mode) .markdown-body h3,
-html.night-mode .markdown-body h3,
+html .markdown-body h3,
 .markdown-body h3 {
   font-size: var(--h3-font-size);
   text-transform: uppercase;
@@ -752,20 +740,13 @@ html.night-mode .markdown-body h3,
   margin-top: var(--h3-margin-top);
 }
 
-html:not(.night-mode) .markdown-body p,
-html:not(.night-mode) .markdown-body span,
-html:not(.night-mode) .markdown-body div,
-html:not(.night-mode) .markdown-body blockquote,
-html:not(.night-mode) .markdown-body li,
-html:not(.night-mode) .markdown-body ol,
-html:not(.night-mode) .markdown-body ul,
-html.night-mode .markdown-body p,
-html.night-mode .markdown-body span,
-html.night-mode .markdown-body div,
-html.night-mode .markdown-body blockquote,
-html.night-mode .markdown-body li,
-html.night-mode .markdown-body ol,
-html.night-mode .markdown-body ul,
+html .markdown-body p,
+html .markdown-body span,
+html .markdown-body div,
+html .markdown-body blockquote,
+html .markdown-body li,
+html .markdown-body ol,
+html .markdown-body ul,
 .markdown-body p,
 .markdown-body span,
 .markdown-body div,
@@ -776,22 +757,18 @@ html.night-mode .markdown-body ul,
   line-height: var(--body-line-height);
 }
 
-html:not(.night-mode) .markdown-body p,
-html.night-mode .markdown-body p,
+html .markdown-body p,
 .markdown-body p {
   margin-top: var(--p-margin-top);
 }
 
-html:not(.night-mode) .markdown-body li,
-html.night-mode .markdown-body li,
+html .markdown-body li,
 .markdown-body li {
   padding-top: var(--list-item-padding-top);
 }
 
-html:not(.night-mode) .markdown-body em,
-html:not(.night-mode) .markdown-body i,
-html.night-mode .markdown-body em,
-html.night-mode .markdown-body i,
+html .markdown-body em,
+html .markdown-body i,
 .markdown-body em,
 .markdown-body i {
   font-style: normal;
@@ -800,36 +777,104 @@ html.night-mode .markdown-body i,
   font-variant: small-caps;
 }
 
-html:not(.night-mode) .markdown-body blockquote,
-html.night-mode .markdown-body blockquote,
+html .markdown-body blockquote,
 .markdown-body blockquote {
   padding-right: 0;
+  border-left: 1pt solid var(--color-muted);
+  margin-left: 0;
+  margin-right: 0.1em;
+  padding-left: 1em;
 }
 
-html:not(.night-mode) .markdown-body blockquote strong,
-html:not(.night-mode) .markdown-body blockquote b,
-html.night-mode .markdown-body blockquote strong,
-html.night-mode .markdown-body blockquote b,
+html .markdown-body blockquote strong,
+html .markdown-body blockquote b,
 .markdown-body blockquote strong,
 .markdown-body blockquote b {
   font-weight: normal;
   background: var(--blockquote-highlight-bg);
 }
 
-html:not(.night-mode) .markdown-body code,
-html:not(.night-mode) .markdown-body pre,
-html:not(.night-mode) .markdown-body kbd,
-html:not(.night-mode) .markdown-body samp,
-html:not(.night-mode) .markdown-body .sidenote-marker,
-html:not(.night-mode) .markdown-body .sidenote-number,
-html:not(.night-mode) .markdown-body sup,
-html.night-mode .markdown-body code,
-html.night-mode .markdown-body pre,
-html.night-mode .markdown-body kbd,
-html.night-mode .markdown-body samp,
-html.night-mode .markdown-body .sidenote-marker,
-html.night-mode .markdown-body .sidenote-number,
-html.night-mode .markdown-body sup,
+html .markdown-body table,
+.markdown-body table {
+  width: 95%;
+  margin: 0 0;
+  padding: 0;
+  font-variant-numeric: tabular-nums;
+  border-collapse: collapse;
+  font-size: var(--table-font-size);
+  hyphens: none;
+}
+
+html .markdown-body table thead,
+.markdown-body table thead {
+  font-family: var(--font-mono);
+  font-size: var(--table-header-font-size);
+}
+
+html .markdown-body table thead tr,
+.markdown-body table thead tr {
+  border-bottom: 1pt solid var(--color-muted) !important;
+}
+
+html .markdown-body table thead th,
+.markdown-body table thead th {
+  border-color: var(--color-muted) !important;
+}
+
+html .markdown-body table td,
+html .markdown-body table th,
+.markdown-body table td,
+.markdown-body table th {
+  vertical-align: top;
+  padding: var(--table-cell-padding);
+  line-height: var(--table-line-height);
+  text-align: left;
+  border-color: var(--color-muted) !important;
+}
+
+html .markdown-body table tr,
+.markdown-body table tr {
+  cursor: default;
+}
+
+html .markdown-body table tbody tr:hover,
+.markdown-body table tbody tr:hover {
+  background-color: transparent;
+}
+
+html .markdown-body table strong,
+.markdown-body table strong {
+  color: var(--color-secondary);
+  font-weight: normal;
+}
+
+html .markdown-body table strong em,
+html .markdown-body table em strong,
+.markdown-body table strong em,
+.markdown-body table em strong {
+  color: var(--color-secondary);
+  font-weight: normal;
+}
+
+html .markdown-body table a,
+html .markdown-body table a:visited,
+html .markdown-body table a:hover,
+html .markdown-body table a:active,
+.markdown-body table a,
+.markdown-body table a:visited,
+.markdown-body table a:hover,
+.markdown-body table a:active {
+  color: inherit;
+  text-decoration: none !important;
+}
+
+html .markdown-body code,
+html .markdown-body pre,
+html .markdown-body kbd,
+html .markdown-body samp,
+html .markdown-body .sidenote-marker,
+html .markdown-body .sidenote-number,
+html .markdown-body sup,
 .markdown-body code,
 .markdown-body pre,
 .markdown-body kbd,
@@ -840,16 +885,13 @@ html.night-mode .markdown-body sup,
   font-family: var(--font-mono);
 }
 
-html:not(.night-mode) .markdown-body code,
-html.night-mode .markdown-body code,
+html .markdown-body code,
 .markdown-body code {
   font-size: var(--code-font-size);
 }
 
-html:not(.night-mode) .markdown-body sup,
-html:not(.night-mode) .markdown-body .sidenote-marker,
-html.night-mode .markdown-body sup,
-html.night-mode .markdown-body .sidenote-marker,
+html .markdown-body sup,
+html .markdown-body .sidenote-marker,
 .markdown-body sup,
 .markdown-body .sidenote-marker {
   font-size: var(--sup-font-size);
@@ -859,8 +901,7 @@ html.night-mode .markdown-body .sidenote-marker,
   line-height: 1;
 }
 
-html:not(.night-mode) .markdown-body sup,
-html.night-mode .markdown-body sup,
+html .markdown-body sup,
 .markdown-body sup {
   position: static;
   top: auto;
@@ -868,24 +909,19 @@ html.night-mode .markdown-body sup,
   vertical-align: var(--sup-vertical-align);
 }
 
-html:not(.night-mode) .markdown-body sup a,
-html:not(.night-mode) .markdown-body sup a:visited,
-html:not(.night-mode) .markdown-body sup a:hover,
-html:not(.night-mode) .markdown-body sup a:active,
-html.night-mode .markdown-body sup a,
-html.night-mode .markdown-body sup a:visited,
-html.night-mode .markdown-body sup a:hover,
-html.night-mode .markdown-body sup a:active,
+html .markdown-body sup a,
+html .markdown-body sup a:visited,
+html .markdown-body sup a:hover,
+html .markdown-body sup a:active,
 .markdown-body sup a,
 .markdown-body sup a:visited,
 .markdown-body sup a:hover,
 .markdown-body sup a:active {
   color: inherit;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
-html:not(.night-mode) .markdown-body .sidenote-marker,
-html.night-mode .markdown-body .sidenote-marker,
+html .markdown-body .sidenote-marker,
 .markdown-body .sidenote-marker {
   position: static;
   top: auto;
