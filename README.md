@@ -11,12 +11,13 @@ Custom iA Writer template with generated sidenotes for markdown footnotes.
         |-- Info.plist
         `-- Resources/
             |-- document.html
+            |-- footer.html
+            |-- header.html
             |-- LICENSE.txt
-            |-- sidenotes-markdown-dark.css
-            |-- sidenotes-markdown-light.css
             |-- sidenotes.css
             |-- sidenotes.html
-            `-- sidenotes.js
+            |-- sidenotes.js
+            `-- title.html
 ```
 
 ## Example
@@ -32,10 +33,11 @@ Custom iA Writer template with generated sidenotes for markdown footnotes.
 
 ## Notes
 
-- Sidenotes are generated from footnote references by `sidenotes.js`.
-- Sidenotes use a measured post-layout adjustment pass to avoid overlapping each other and to keep notes away from the bottom edge in wide-screen and print layouts.
-- Typography and layout variables live at the top of `sidenotes.css`.
-- Print behavior is configured in the `@media print` section.
+- **Header, Footer & Title Page**: The template includes customizable header and footer sections that appear on every exported page, plus a dedicated title page layout. All styling uses responsive padding that aligns with the body text margins.
+- **Sidenotes**: Generated from footnote references by `sidenotes.js`.
+- **Layout**: Sidenotes use a measured post-layout adjustment pass to avoid overlapping each other and to keep notes away from the bottom edge in wide-screen and print layouts.
+- **Variables**: Typography, layout, and color variables are centralized at the top of `sidenotes.css` under the `:root` scope for easy customization.
+- **Print behavior** is configured in the `@media print` section.
 
 ## Limitations
 

@@ -1,11 +1,90 @@
-/* github-markdown, github-markdown-mobile are extracted using https://github.com/sindresorhus/generate-github-markdown-css */
-/* .pl styles have been removed, because they refer to prettylights syntax highlighter https://github.com/primer/github-syntax-theme-generator */
+:root {
+  /* ========== COLOR SCHEME ========== */
+  /* Define core colors here. Change these to alter the entire theme. */
+  --color-primary: #333333;      /* Main text color */
+  --color-secondary: #666666;    /* Secondary text (headers, titles) */
+  --color-muted: #999999;        /* Muted text (dates, page numbers) */
+  --color-border: #e0e0e0;       /* Borders and dividers */
+  --color-highlight: rgba(255, 228, 120, 0.38); /* Blockquote highlights */
 
-@import 'sidenotes-markdown-light.css' screen, print;
+  /* ========== RESPONSIVE PADDING LEVELS ========== */
+  /* Used for body, header, and footer alignment */
+  --padding-xs: 15px;
+  --padding-sm: 25px;
+  --padding-md: 35px;
+  --padding-lg: 45px;
+  --padding-print: 75px;
 
-@import 'sidenotes-markdown-dark.css' screen;
+  /* ========== CORE LAYOUT ========== */
+  --horizontal-padding: 0;
+  --content-max-width: 830px;
+  --content-max-width-wide: 760px;
 
-@import 'sidenotes-variables.css' screen, print;
+  /* ========== TITLE PAGE ========== */
+  --title-page-max-width: 600px;
+  --title-page-padding: 2em;
+
+  /* Title */
+  --title-h1-font-size: 2.5em;
+  --title-h1-margin-bottom: 0.5em;
+
+  /* Author */
+  --title-author-font-size: 1.2em;
+  --title-author-color: var(--color-secondary);
+  --title-author-margin-bottom: 1em;
+
+  /* ========== HEADER & FOOTER ========== */
+  /* Shared padding and sizing */
+  --section-padding-vertical: 1em;
+  --section-font-size: 0.6em;
+  --section-color: var(--color-secondary);
+  --section-border-color: var(--color-border);
+
+  /* Header specific */
+  --header-title-font-weight: 500;
+  --header-author-font-size: 0.9em;
+  --header-author-color: var(--color-muted);
+
+  /* Footer specific */
+  --footer-color: var(--color-muted);
+  --footer-page-number-font-weight: 500;
+
+  /* ========== PRINT ========== */
+  --print-horizontal-padding: 75px;
+  --print-sidenote-margin-bottom: 0.9rem;
+  --print-sidenote-color: var(--color-secondary);
+  --print-sidenote-border-color: var(--color-border);
+}
+
+@media screen and (max-width: 420px) {
+  :root {
+    --horizontal-padding: 15px;
+  }
+}
+
+@media screen and (min-width: 420px) and (max-width: 500px) {
+  :root {
+    --horizontal-padding: 25px;
+  }
+}
+
+@media screen and (min-width: 500px) and (max-width: 550px) {
+  :root {
+    --horizontal-padding: 35px;
+  }
+}
+
+@media screen and (min-width: 550px) {
+  :root {
+    --horizontal-padding: 45px;
+  }
+}
+
+@media print {
+  :root {
+    --horizontal-padding: var(--print-horizontal-padding);
+  }
+}
 
 .markdown-body {
   padding-top: 0;
@@ -16,6 +95,65 @@
   font-family: var(--font-serif);
   font-feature-settings: var(--font-feature-settings);
   font-size: var(--body-font-size);
+
+  --font-serif: "calendas", "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, "Times New Roman", Times, serif;
+  --font-mono: "mono-space", "Roboto Mono", "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
+
+  /* Body text */
+  --body-font-size: 10pt;
+  --body-line-height: 1.4;
+
+  /* Headings */
+  --heading-line-height: 1.2;
+  --h1-swashes: "liga" 1, "calt" 1, "kern" 1, "swsh" 1;
+  --h3-font-size: 0.7em;
+  --h3-letter-spacing: 0.5px;
+  --h3-margin-top: 36px;
+
+  /* Paragraphs and lists */
+  --p-margin-top: 24px;
+  --list-item-padding-top: 0.25em;
+
+  /* Code and special elements */
+  --code-font-size: 0.8em;
+  --sup-font-size: 5pt;
+  --sup-border-width: 0pt;
+  --sup-border-radius: 0pt;
+  --sup-padding: 0 0;
+  --sup-vertical-align: 4pt;
+
+  /* Blockquotes */
+  --blockquote-highlight-bg: var(--color-highlight);
+
+  /* ========== SIDENOTES ========== */
+  /* Geometry */
+  --sidenote-width: 150px;
+  --sidenote-gap: 28px;
+  --sidenote-margin-left: 1.25rem;
+  --sidenote-margin-bottom: 1rem;
+  --sidenote-padding-left: 0.8rem;
+  --sidenote-border-width: 0px;
+
+  /* Typography and color */
+  --sidenote-font-size: 8pt;
+  --sidenote-line-height: 1.35;
+  --sidenote-color: var(--color-secondary);
+  --sidenote-border-color: var(--color-border);
+
+  /* Markers */
+  --sidenote-marker-min-width: 2.2ch;
+  --sidenote-marker-gap: 0.45em;
+
+  /* Inline variant (tablets) */
+  --sidenote-inline-font-size: 0.9em;
+  --sidenote-inline-margin: 0.45rem 0 1rem 1.2rem;
+
+  /* Footnotes */
+  --footnotes-block-margin-top: 1.6rem;
+  --footnotes-block-padding-left: 1rem;
+  --footnotes-list-margin-top: 0.6rem;
+  --footnotes-item-margin: 0.45rem 0 0.95rem 0;
 }
 
 .markdown-body .sidenote-toggle,
@@ -189,6 +327,157 @@
   .markdown-body {
     padding-left: calc(var(--horizontal-padding) + env(safe-area-inset-left));
     padding-right: calc(var(--horizontal-padding) + env(safe-area-inset-right));
+  }
+}
+
+/* Title Page Styling */
+.ia-title-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  padding: var(--title-page-padding);
+}
+
+.title-page {
+  max-width: var(--title-page-max-width);
+}
+
+.title-page h1 {
+  font-size: var(--title-h1-font-size);
+  margin-bottom: var(--title-h1-margin-bottom);
+}
+
+.title-page .author {
+  font-size: var(--title-author-font-size);
+  color: var(--title-author-color);
+  margin-bottom: var(--title-author-margin-bottom);
+}
+
+.title-page .date {
+  font-size: var(--title-date-font-size);
+  color: var(--title-date-color);
+}
+
+/* Header Styling */
+body {
+  font-family: var(--font-serif);
+  font-size: var(--body-font-size);
+}
+
+.ia-header-container {
+  margin: 0 !important;
+  padding-top: var(--section-padding-vertical) !important;
+  padding-bottom: var(--section-padding-vertical) !important;
+  padding-left: 45px;
+  padding-right: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 0px solid var(--section-border-color) !important;
+  font-size: var(--section-font-size) !important;
+  color: var(--section-color) !important;
+}
+
+.header-left {
+  flex: 1;
+}
+
+.header-right {
+  text-align: right;
+}
+
+.header-title-text {
+  font-weight: var(--header-title-font-weight);
+}
+
+.header-author-text {
+  font-size: var(--header-author-font-size);
+  color: var(--header-author-color);
+}
+
+/* Footer Styling */
+.ia-footer-container {
+  margin: 0 !important;
+  padding-top: var(--section-padding-vertical) !important;
+  padding-bottom: var(--section-padding-vertical) !important;
+  padding-left: 45px;
+  padding-right: 45px;
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 0px solid var(--section-border-color) !important;
+  font-size: var(--section-font-size) !important;
+  color: var(--footer-color) !important;
+}
+
+.footer-left {
+  flex: 1;
+}
+
+.footer-right {
+  text-align: right;
+}
+
+.footer-page-number {
+  font-weight: var(--footer-page-number-font-weight);
+}
+
+/* Responsive padding for header and footer containers */
+@media screen and (max-width: 420px) {
+  .ia-header-container {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+  .ia-footer-container {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+}
+
+@media screen and (min-width: 420px) and (max-width: 500px) {
+  .ia-header-container {
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+  }
+  .ia-footer-container {
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+  }
+}
+
+@media screen and (min-width: 500px) and (max-width: 550px) {
+  .ia-header-container {
+    padding-left: 35px !important;
+    padding-right: 35px !important;
+  }
+  .ia-footer-container {
+    padding-left: 35px !important;
+    padding-right: 35px !important;
+  }
+}
+
+@media screen and (min-width: 550px) {
+  .ia-header-container {
+    padding-left: 45px !important;
+    padding-right: 45px !important;
+  }
+  .ia-footer-container {
+    padding-left: 45px !important;
+    padding-right: 45px !important;
+  }
+}
+
+@media print {
+  .ia-header-container {
+    padding-left: 75px !important;
+    padding-right: 75px !important;
+  }
+  .ia-footer-container {
+    padding-left: 75px !important;
+    padding-right: 75px !important;
   }
 }
 
