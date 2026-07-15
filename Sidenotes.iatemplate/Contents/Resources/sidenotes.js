@@ -1,10 +1,13 @@
 (function () {
   var DEBUG = true; // set to true to re-enable on-page debugging
+  var debugLog = []; // accumulate all debug messages
 
   function setDebug(message) {
     if (!DEBUG || !document || !document.body) {
       return;
     }
+
+    debugLog.push(message);
 
     var note = document.getElementById("ia-sidenote-debug");
     if (!note) {
@@ -14,7 +17,7 @@
       document.body.appendChild(note);
     }
 
-    note.textContent = "Sidenotes debug: " + message;
+    note.textContent = "Sidenotes debug:\n" + debugLog.join("\n");
   }
 
   function hasClass(element, className) {
@@ -165,6 +168,7 @@
         (desiredTop - previousDesiredTop) > pageBreakThreshold
       ) {
         previousBottom = null;
+        setDebug("page break detected at note " + i);
       }
 
       var minTop = previousBottom === null ? desiredTop : previousBottom + minimumGap;
@@ -183,7 +187,11 @@
         placedTop = minTop;
       }
 
-      note.style.setProperty("--sidenote-shift", Math.round(placedTop - desiredTop) + "px");
+      var shift = Math.round(placedTop - desiredTop);
+      note.style.setProperty("--sidenote-shift", shift + "px");
+      if (shift !== 0) {
+        setDebug("note " + i + ": shift=" + shift + "px (desiredTop=" + Math.round(desiredTop) + ", placedTop=" + Math.round(placedTop) + ")");
+      }
       previousBottom = placedTop + height;
       previousDesiredTop = desiredTop;
     }
