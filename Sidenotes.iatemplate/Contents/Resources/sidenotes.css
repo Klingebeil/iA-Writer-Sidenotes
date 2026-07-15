@@ -124,6 +124,12 @@
   --table-cell-padding: 6px;
   --table-line-height: var(--body-line-height);
 
+  /* Images */
+  --image-max-width: 95%;
+  --image-margin-top: 24px;
+  --image-margin-bottom: 24px;
+  --image-caption-color: var(--color-muted);
+
   /* Blockquotes */
   --blockquote-highlight-bg: var(--color-highlight);
 
@@ -489,6 +495,10 @@ body {
 }
 
 @media screen and (min-width: 700px) and (max-width: 979px) {
+  .markdown-body {
+    --image-max-width: 100%;
+  }
+
   .markdown-body .footnotes {
     margin-top: var(--footnotes-block-margin-top);
     padding-left: var(--footnotes-block-padding-left);
@@ -541,6 +551,7 @@ body {
   .markdown-body {
     max-width: var(--content-max-width-wide);
     padding-right: calc(var(--horizontal-padding) + var(--sidenote-width) + var(--sidenote-gap));
+    --image-max-width: 100%;
   }
 
   .markdown-body .footnotes {
@@ -868,6 +879,21 @@ html .markdown-body table a:active,
   text-decoration: none !important;
 }
 
+html .markdown-body img,
+.markdown-body img {
+  display: block;
+  width: var(--image-max-width);
+  max-width: 95%;
+  height: auto;
+  margin: var(--image-margin-top) 0 var(--image-margin-bottom) 0;
+}
+
+html .markdown-body figure img,
+.markdown-body figure img {
+  width: 100%;
+  margin: 0;
+}
+
 html .markdown-body code,
 html .markdown-body pre,
 html .markdown-body kbd,
@@ -948,8 +974,14 @@ html .markdown-body .sidenote-marker,
   -webkit-margin-after: 0em;
   -webkit-margin-start: 0px;
   -webkit-margin-end: 0px;
+  width: var(--image-max-width);
+  max-width: 100%;
+  margin-top: var(--image-margin-top);
+  margin-bottom: var(--image-margin-bottom);
 }
 
 .markdown-body figcaption {
+	margin-top: 8px;
 	margin-bottom: 16px; /* same as between paragraphs */
+	color: var(--image-caption-color);
 }
