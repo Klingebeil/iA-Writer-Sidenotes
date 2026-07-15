@@ -1,13 +1,10 @@
 (function () {
-  var DEBUG = true; // set to true to re-enable on-page debugging
-  var debugLog = []; // accumulate all debug messages
+  var DEBUG = false; // set to true to re-enable on-page debugging
 
   function setDebug(message) {
     if (!DEBUG || !document || !document.body) {
       return;
     }
-
-    debugLog.push(message);
 
     var note = document.getElementById("ia-sidenote-debug");
     if (!note) {
@@ -17,7 +14,7 @@
       document.body.appendChild(note);
     }
 
-    note.textContent = "Sidenotes debug:\n" + debugLog.join("\n");
+    note.textContent = "Sidenotes debug: " + message;
   }
 
   function hasClass(element, className) {
@@ -118,31 +115,18 @@
     return isNaN(number) ? 0 : number;
   }
 
-  function getLastFragmentRect(element) {
-    var rects = element.getClientRects();
-    if (rects.length === 0) {
-      return element.getBoundingClientRect();
-    }
-    return rects[rects.length - 1];
-  }
-
   function positionSidenotes(root) {
-    setDebug("positionSidenotes called");
-
     if (!root) {
-      setDebug("positionSidenotes: no root");
       return;
     }
 
     var sidenotes = root.querySelectorAll(".sidenote");
     if (sidenotes.length === 0) {
-      setDebug("positionSidenotes: no sidenotes found");
       return;
     }
 
     var firstNoteStyle = window.getComputedStyle(sidenotes[0]);
     if (!firstNoteStyle || firstNoteStyle.display === "none") {
-      setDebug("positionSidenotes: sidenotes display=none, skipping");
       return;
     }
 
@@ -151,31 +135,14 @@
     var rootRect = root.getBoundingClientRect();
     var bottomLimit = window.pageYOffset + rootRect.bottom;
     var minimumGap = Math.max(8, getStyleNumber(sidenotes[0], "margin-bottom"));
-
-    var PAGE_BREAK_GAP_MULTIPLIER = 4;
-    var pageBreakThreshold = minimumGap * PAGE_BREAK_GAP_MULTIPLIER;
-
     var previousBottom = null;
-    var previousDesiredTop = null;
     var i;
-
-    setDebug("positioning " + sidenotes.length + " sidenotes, bottomLimit=" + bottomLimit);
 
     for (i = 0; i < sidenotes.length; i += 1) {
       var note = sidenotes[i];
-      var rect = getLastFragmentRect(note);
+      var rect = note.getBoundingClientRect();
       var desiredTop = window.pageYOffset + rect.top;
       var height = rect.height;
-
-      if (
-        previousBottom !== null &&
-        previousDesiredTop !== null &&
-        (desiredTop - previousDesiredTop) > pageBreakThreshold
-      ) {
-        previousBottom = null;
-        setDebug("page break detected at note " + i);
-      }
-
       var minTop = previousBottom === null ? desiredTop : previousBottom + minimumGap;
       var maxTop = bottomLimit - height;
       var placedTop = desiredTop;
@@ -192,26 +159,18 @@
         placedTop = minTop;
       }
 
-      var shift = Math.round(placedTop - desiredTop);
-      note.style.setProperty("--sidenote-shift", shift + "px");
-      if (shift !== 0) {
-        setDebug("note " + i + ": shift=" + shift + "px (desiredTop=" + Math.round(desiredTop) + ", placedTop=" + Math.round(placedTop) + ")");
-      }
+      note.style.setProperty("--sidenote-shift", Math.round(placedTop - desiredTop) + "px");
       previousBottom = placedTop + height;
-      previousDesiredTop = desiredTop;
     }
   }
 
   function scheduleSidenotePositioning(root) {
-    setDebug("scheduleSidenotePositioning called");
     if (!window.requestAnimationFrame) {
-      setDebug("no requestAnimationFrame, calling positionSidenotes directly");
       positionSidenotes(root);
       return;
     }
 
     window.requestAnimationFrame(function () {
-      setDebug("requestAnimationFrame fired, calling positionSidenotes");
       positionSidenotes(root);
     });
   }
