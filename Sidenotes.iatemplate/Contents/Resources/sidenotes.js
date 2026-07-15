@@ -127,17 +127,22 @@
   }
 
   function positionSidenotes(root) {
+    setDebug("positionSidenotes called");
+
     if (!root) {
+      setDebug("positionSidenotes: no root");
       return;
     }
 
     var sidenotes = root.querySelectorAll(".sidenote");
     if (sidenotes.length === 0) {
+      setDebug("positionSidenotes: no sidenotes found");
       return;
     }
 
     var firstNoteStyle = window.getComputedStyle(sidenotes[0]);
     if (!firstNoteStyle || firstNoteStyle.display === "none") {
+      setDebug("positionSidenotes: sidenotes display=none, skipping");
       return;
     }
 
@@ -198,12 +203,15 @@
   }
 
   function scheduleSidenotePositioning(root) {
+    setDebug("scheduleSidenotePositioning called");
     if (!window.requestAnimationFrame) {
+      setDebug("no requestAnimationFrame, calling positionSidenotes directly");
       positionSidenotes(root);
       return;
     }
 
     window.requestAnimationFrame(function () {
+      setDebug("requestAnimationFrame fired, calling positionSidenotes");
       positionSidenotes(root);
     });
   }
