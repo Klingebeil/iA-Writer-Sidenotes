@@ -1,5 +1,5 @@
 (function () {
-  var DEBUG = false; // set to true to re-enable on-page debugging
+  var DEBUG = true; // set to true to re-enable on-page debugging
 
   function setDebug(message) {
     if (!DEBUG || !document || !document.body) {
@@ -123,71 +123,38 @@
     return rects[rects.length - 1];
   }
 
-  function getPageBoundaries(root) {
-    var rootStyle = window.getComputedStyle(root);
-    var columnsProp = rootStyle.getPropertyValue("columns") || rootStyle.getPropertyValue("-webkit-columns");
-    var pages = [];
-
-    if (columnsProp && columnsProp !== "auto") {
-      var rootRect = root.getBoundingClientRect();
-      var docHeight = root.scrollHeight;
-      var columnCount = parseInt(columnsProp, 10);
-
-      if (!isNaN(columnCount) && columnCount > 0) {
-        var pageHeight = docHeight / columnCount;
-        var i;
-        for (i = 0; i < columnCount; i += 1) {
-          pages.push({
-            top: pageHeight * i,
-            bottom: pageHeight * (i + 1)
-          });
-        }
-        return pages;
-      }
+  function positionSidenotes(root) {
+    if (!root) {
+      return;
     }
 
-    var pageContainers = root.querySelectorAll(".page, [data-page]");
-    if (pageContainers.length > 0) {
-      var i;
-      for (i = 0; i < pageContainers.length; i += 1) {
-        var container = pageContainers[i];
-        var rect = container.getBoundingClientRect();
-        pages.push({
-          top: window.pageYOffset + rect.top,
-          bottom: window.pageYOffset + rect.bottom
-        });
-      }
-      return pages;
+    var sidenotes = root.querySelectorAll(".sidenote");
+    if (sidenotes.length === 0) {
+      return;
     }
 
-    pages.push({
-      top: 0,
-      bottom: window.pageYOffset + root.getBoundingClientRect().bottom
-    });
-    return pages;
-  }
-
-  function getPageForRect(rect, pages) {
-    var pageYOffset = window.pageYOffset;
-    var rectTop = pageYOffset + rect.top;
-    var i;
-    for (i = 0; i < pages.length; i += 1) {
-      if (rectTop >= pages[i].top && rectTop < pages[i].bottom) {
-        return i;
-      }
+    var firstNoteStyle = window.getComputedStyle(sidenotes[0]);
+    if (!firstNoteStyle || firstNoteStyle.display === "none") {
+      return;
     }
-    return pages.length - 1;
-  }
 
-  function stackNotesForPage(noteGroup, pageBoundary, minimumGap) {
+    resetSidenoteOffsets(root);
+
+    var rootRect = root.getBoundingClientRect();
+    var bottomLimit = window.pageYOffset + rootRect.bottom;
+    var minimumGap = Math.max(8, getStyleNumber(sidenotes[0], "margin-bottom"));
+
+    var PAGE_BREAK_GAP_MULTIPLIER = 4;
+    var pageBreakThreshold = minimumGap * PAGE_BREAK_GAP_MULTIPLIER;
+
     var previousBottom = null;
     var previousDesiredTop = null;
-    var pageBreakThreshold = minimumGap * 4;
-    var bottomLimit = pageBoundary.bottom;
     var i;
 
-    for (i = 0; i < noteGroup.length; i += 1) {
-      var note = noteGroup[i];
+    setDebug("positioning " + sidenotes.length + " sidenotes, bottomLimit=" + bottomLimit);
+
+    for (i = 0; i < sidenotes.length; i += 1) {
+      var note = sidenotes[i];
       var rect = getLastFragmentRect(note);
       var desiredTop = window.pageYOffset + rect.top;
       var height = rect.height;
@@ -219,46 +186,6 @@
       note.style.setProperty("--sidenote-shift", Math.round(placedTop - desiredTop) + "px");
       previousBottom = placedTop + height;
       previousDesiredTop = desiredTop;
-    }
-  }
-
-  function positionSidenotes(root) {
-    if (!root) {
-      return;
-    }
-
-    var sidenotes = root.querySelectorAll(".sidenote");
-    if (sidenotes.length === 0) {
-      return;
-    }
-
-    var firstNoteStyle = window.getComputedStyle(sidenotes[0]);
-    if (!firstNoteStyle || firstNoteStyle.display === "none") {
-      return;
-    }
-
-    resetSidenoteOffsets(root);
-
-    var minimumGap = Math.max(8, getStyleNumber(sidenotes[0], "margin-bottom"));
-    var pages = getPageBoundaries(root);
-    var pageGroups = {};
-    var i;
-
-    for (i = 0; i < sidenotes.length; i += 1) {
-      var note = sidenotes[i];
-      var rect = getLastFragmentRect(note);
-      var pageIndex = getPageForRect(rect, pages);
-
-      if (!pageGroups[pageIndex]) {
-        pageGroups[pageIndex] = [];
-      }
-      pageGroups[pageIndex].push(note);
-    }
-
-    for (i = 0; i < pages.length; i += 1) {
-      if (pageGroups[i]) {
-        stackNotesForPage(pageGroups[i], pages[i], minimumGap);
-      }
     }
   }
 
