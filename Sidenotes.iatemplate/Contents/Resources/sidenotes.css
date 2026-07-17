@@ -49,51 +49,12 @@
   /* ========== PRINT ========== */
   --print-horizontal-padding: 75px;
   --print-sidenote-margin-bottom: 0.9rem;
-}
-
-@media screen and (max-width: 420px) {
-  :root {
-    --horizontal-padding: 15px;
-  }
-}
-
-@media screen and (min-width: 420px) and (max-width: 500px) {
-  :root {
-    --horizontal-padding: 25px;
-  }
-}
-
-@media screen and (min-width: 500px) and (max-width: 550px) {
-  :root {
-    --horizontal-padding: 35px;
-  }
-}
-
-@media screen and (min-width: 550px) {
-  :root {
-    --horizontal-padding: 45px;
-  }
-}
-
-@media print {
-  :root {
-    --horizontal-padding: var(--print-horizontal-padding);
-  }
-}
-
-.markdown-body {
-  padding-top: 0;
-  padding-bottom: 0;
-
-  padding-left: var(--horizontal-padding);
-  padding-right: var(--horizontal-padding);
-  font-family: var(--font-serif);
-  font-feature-settings: var(--font-feature-settings);
-  font-size: var(--body-font-size);
 
   --font-serif: "calendas", "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, "Times New Roman", Times, serif;
   --font-mono: "mono-space", "Roboto Mono", "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --font-feature-settings: "liga" 1, "calt" 1, "kern" 1;
+
+  /* ========== TYPOGRAPHY ========== */
 
   /* Body text */
   --body-font-size: 10pt;
@@ -161,6 +122,47 @@
   --footnotes-block-padding-left: 1rem;
   --footnotes-list-margin-top: 0.6rem;
   --footnotes-item-margin: 0.45rem 0 0.95rem 0;
+}
+
+@media screen and (max-width: 420px) {
+  :root {
+    --horizontal-padding: 15px;
+  }
+}
+
+@media screen and (min-width: 420px) and (max-width: 500px) {
+  :root {
+    --horizontal-padding: 25px;
+  }
+}
+
+@media screen and (min-width: 500px) and (max-width: 550px) {
+  :root {
+    --horizontal-padding: 35px;
+  }
+}
+
+@media screen and (min-width: 550px) {
+  :root {
+    --horizontal-padding: 45px;
+  }
+}
+
+@media print {
+  :root {
+    --horizontal-padding: var(--print-horizontal-padding);
+  }
+}
+
+.markdown-body {
+  padding-top: 0;
+  padding-bottom: 0;
+
+  padding-left: var(--horizontal-padding);
+  padding-right: var(--horizontal-padding);
+  font-family: var(--font-serif);
+  font-feature-settings: var(--font-feature-settings);
+  font-size: var(--body-font-size);
 }
 
 .markdown-body .sidenote-toggle,
