@@ -125,7 +125,7 @@
   --table-line-height: var(--body-line-height);
 
   /* Images */
-  --image-max-width: 95%;
+  --image-max-width: 99%;
   --image-margin-top: 24px;
   --image-margin-bottom: 24px;
   --image-caption-color: var(--color-muted);
@@ -208,6 +208,14 @@
   margin-top: var(--p-margin-top);
 }
 
+.markdown-body a,
+.markdown-body a:visited,
+.markdown-body a:hover,
+.markdown-body a:active {
+  color: inherit;
+  text-decoration-color: var(--color-secondary);
+}
+
 .markdown-body li {
   padding-top: var(--list-item-padding-top);
 }
@@ -225,6 +233,18 @@
 .markdown-body blockquote b {
   font-weight: normal;
   background: var(--blockquote-highlight-bg);
+}
+
+.markdown-body hr {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  box-shadow: none !important;
+  outline: none;
+  height: 1pt;
+  background: var(--color-border);
+  margin: 1em 0;
 }
 
 .markdown-body code,
@@ -281,47 +301,6 @@
 .markdown-body .sidenote-content > :last-child {
   margin-bottom: 0;
 }
-
-/*
-.markdown-body .ia-sidenote-debug {
-  position: sticky;
-  top: 0;
-  z-index: 999;
-  margin: 0 0 12px 0;
-  padding: 8px 10px;
-  border: 1px solid #d0d7de;
-  border-radius: 6px;
-  background: #fff8c5;
-  color: #3d2f00;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
-  font-size: 8px;
-  line-height: 1.35;
-}
-
-.markdown-body #ia-inline-probe,
-.markdown-body #ia-noscript-probe {
-  position: sticky;
-  top: 0;
-  z-index: 998;
-  margin: 0 0 8px 0;
-  padding: 7px 10px;
-  border: 1px solid #d0d7de;
-  border-radius: 6px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
-  font-size: 8px;
-  line-height: 1.35;
-}
-
-.markdown-body #ia-inline-probe {
-  background: #e7f5ff;
-  color: #093b6b;
-}
-
-.markdown-body #ia-noscript-probe {
-  background: #ffe8e8;
-  color: #7a1010;
-}
-*/
 
 @supports (padding: constant(safe-area-inset-left)) and (padding: constant(safe-area-inset-right)) {
   .markdown-body {
@@ -883,7 +862,6 @@ html .markdown-body img,
 .markdown-body img {
   display: block;
   width: var(--image-max-width);
-  max-width: 95%;
   height: auto;
   margin: var(--image-margin-top) 0 var(--image-margin-bottom) 0;
 }
