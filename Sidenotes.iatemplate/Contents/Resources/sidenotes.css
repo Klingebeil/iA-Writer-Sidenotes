@@ -3,8 +3,8 @@
   /* Define core colors here. Change these to alter the entire theme. */
   --color-primary: #333333;      /* Main text color */
   --color-secondary: #666666;    /* Secondary text (headers, titles) */
-  --color-muted: #999999;        /* Muted text (dates, page numbers) */
-  --color-border: #e0e0e0;       /* Borders and dividers */
+  --color-muted: #e9e9e9;        /* Muted text (dates, page numbers) */
+  --color-border: #e9e9e9;       /* Borders and dividers */
   --color-highlight: rgba(255, 228, 120, 0.38); /* Blockquote highlights */
 
   /* ========== RESPONSIVE PADDING LEVELS ========== */
@@ -43,7 +43,7 @@
   --header-author-font-size: 0.9em;
 
   /* Footer specific */
-  --footer-color: var(--color-muted);
+  --footer-color: var(--color-secondary);
   --footer-page-number-font-weight: 500;
 
   /* ========== PRINT ========== */
@@ -367,22 +367,33 @@ body {
   border-bottom: 0pt solid var(--color-muted) !important;
   font-size: var(--section-font-size) !important;
   color: var(--color-secondary) !important;
+  font-family: var(--font-mono) !important;
 }
 
 .header-left {
   flex: 1;
+  font-family: var(--font-mono) !important;
 }
 
 .header-right {
   text-align: right;
+  font-family: var(--font-mono) !important;
 }
 
 .header-title-text {
   font-weight: var(--header-title-font-weight);
+  font-family: var(--font-mono) !important;
+  background-color: var(--color-muted);
+  padding: 3px 5px;
+  border-radius: 4px;
 }
 
 .header-author-text {
   font-size: var(--header-author-font-size);
+  font-family: var(--font-mono) !important;
+  background-color: var(--color-muted);
+  padding: 3px 5px;
+  border-radius: 4px;
 }
 
 /* Footer Styling */
@@ -398,18 +409,25 @@ body {
   border-top: 0px solid var(--color-muted) !important;
   font-size: var(--section-font-size) !important;
   color: var(--footer-color) !important;
+  font-family: var(--font-mono) !important;
 }
 
 .footer-left {
   flex: 1;
+  font-family: var(--font-mono) !important;
 }
 
 .footer-right {
   text-align: right;
+  font-family: var(--font-mono) !important;
 }
 
 .footer-page-number {
   font-weight: var(--footer-page-number-font-weight);
+  font-family: var(--font-mono) !important;
+  background-color: var(--color-muted);
+  padding: 3px 4px;
+  border-radius: 4px;
 }
 
 /* Responsive padding for header and footer containers */
