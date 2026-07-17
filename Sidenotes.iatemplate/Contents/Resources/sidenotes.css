@@ -125,7 +125,7 @@
   --table-line-height: var(--body-line-height);
 
   /* Images */
-  --image-max-width: 99%;
+  --image-max-width: 98%;
   --image-margin-top: 24px;
   --image-margin-bottom: 24px;
   --image-caption-color: var(--color-muted);
@@ -475,7 +475,7 @@ body {
 
 @media screen and (min-width: 700px) and (max-width: 979px) {
   .markdown-body {
-    --image-max-width: 100%;
+    --image-max-width: 99%;
   }
 
   .markdown-body .footnotes {
@@ -530,7 +530,7 @@ body {
   .markdown-body {
     max-width: var(--content-max-width-wide);
     padding-right: calc(var(--horizontal-padding) + var(--sidenote-width) + var(--sidenote-gap));
-    --image-max-width: 100%;
+    --image-max-width: 99%;
   }
 
   .markdown-body .footnotes {
@@ -864,6 +864,7 @@ html .markdown-body img,
   width: var(--image-max-width);
   height: auto;
   margin: var(--image-margin-top) 0 var(--image-margin-bottom) 0;
+  padding: 0;
 }
 
 html .markdown-body figure img,
